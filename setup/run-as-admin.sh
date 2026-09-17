@@ -59,7 +59,8 @@ fi
 
 title="管理者操作: ${name}"
 if command -v ptyxis >/dev/null 2>&1; then
-    setsid ptyxis --new-window --title="$title" -x "bash ${wrapper}" >/dev/null 2>&1 &
+    # Ptyxis is the default terminal on Ubuntu 25.10+; its manual prefers "--" over --execute.
+    setsid ptyxis --new-window --title="$title" -- bash "$wrapper" >/dev/null 2>&1 &
 elif command -v gnome-terminal >/dev/null 2>&1; then
     setsid gnome-terminal --title="$title" -- bash "$wrapper" >/dev/null 2>&1 &
 elif command -v wezterm >/dev/null 2>&1; then
