@@ -4,12 +4,11 @@
 
 | 事項 | 状況 | 提案 |
 | --- | --- | --- |
-| Bionic（LM Studio 社） | 2026-09-08 の 1.1.2 で Linux 版が出たと公式の変更履歴にあるが、配布形式と URL を確認できていない | 使っているなら当日に公式サイトから入れる。使っていなければ入れない |
-| FreeToken Desktop | Linux 版があると README にあるが、配布形式が未確認 | 同上 |
+| Bionic（LM Studio 社の AI エージェントアプリ、2026-07 発表） | Linux 版あり（1.1.2 以降）。この PC には 09-11 に入れ 09-15 頃まで触った形跡、専用のモデル置き場は空 | オーナーに説明済み、入れるかの回答待ち |
 | GitHub Desktop | 公式の Linux 版なし（有志版は 2025-02 で止まっている） | 入れない。gh と lazygit で代わりにする |
 | DLsiteNest | Linux 版なし | ブラウザで利用 |
 | Synology BeeStation | Linux のクライアントなし | Web ポータルか、ローカルの共有フォルダとしてつなぐ（資格情報はオーナーが入力） |
-| HyperX NGENUITY | Linux 版なし | 何に使っているか（ヘッドセット・マイク・キーボード）を聞いてから、HeadsetControl / OpenRGB を検討 |
+| HyperX NGENUITY | Linux 版なし。使っている機器は USB マイク HyperX QuadCast S（09-17 オーナー回答・Windows の機器一覧で確認） | 入れない。マイク自体は標準の USB オーディオとして使える見込みで、ミュートと音量つまみは本体側で効く。光り方の設定だけができなくなる。当日にマイクの入力を確認する |
 | Notion・Teams・Outlook・Copilot | デスクトップ版なし | Chrome で開き、必要なら「アプリとしてインストール」。Notion の MCP はトークン抜きの雛形だけ持ち出し（投資アプリ側では廃止済み） |
 | LINE | Linux 版なし | 公式の Chrome 拡張（Chrome の同期で戻る） |
 | codex-pet | GitHub にリモートが無い | 旧ドライブを読み取り専用でつないだ後に写す |
@@ -21,6 +20,11 @@
 
 - Discord の `.deb` 版が自分で更新されるか（最初の更新が来たとき）
 - MOTU M シリーズの入出力（26.04 での報告が見つからない）
+- HyperX QuadCast S のマイク入力（設定 → サウンドで入力に選べて、音が入るか）
+
+## 不要と決まったもの
+
+- FreeToken Desktop（09-17 オーナー回答: 使っていない）
 - Claude アプリ（ベータ）と ChatGPT アプリ（プレビュー）の Wayland での不具合（通知・ショートカット・浮動ウィンドウ）
 - 日本語入力が Chrome で二重にならないか
 

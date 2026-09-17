@@ -46,7 +46,7 @@
   - 別の端末から SSH で入れるようにする（ssh）
 - **ログインし直し**: 権限の変更を反映するため、1 回ログアウトしてもらいます。
 - **各アプリのログイン**: Chrome（同期）・Claude アプリ・ChatGPT・Discord・Cursor・Obsidian・Thunderbird・OpenCode。
-- **目視確認**: 最後に AI が確認表を出します。日本語入力、音声入力（Handy）、スピーカーとマイク（MOTU）、Discord の画面共有を実際に試してください。
+- **目視確認**: 最後に AI が確認表を出します。日本語入力、音声入力（Handy）、スピーカー（MOTU）とマイク（HyperX QuadCast S）、Discord の画面共有を実際に試してください。
 
 ## 終わったと言える状態
 

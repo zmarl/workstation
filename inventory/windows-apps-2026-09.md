@@ -32,8 +32,8 @@
 | FFmpeg / ImageMagick / Poppler / 7-Zip | 入れる | Ubuntu のパッケージ | 10-base |
 | yt-dlp（uv tool） | 入れる | uv tool | 40-user-tools |
 | Unsloth | 不要（ここでは） | 投資アプリ側の学習環境で扱う（ODR-0044） | — |
-| Bionic（Element Labs） | 判断待ち | Linux 版の配布形式が未確認 | — |
-| FreeToken Desktop | 判断待ち | Linux 版の配布形式が未確認 | — |
+| Bionic（LM Studio 社の AI エージェント） | 判断待ち | Linux 版あり。入れるかはオーナーの回答待ち | — |
+| FreeToken Desktop | 不要 | 使っていない（09-17 オーナー回答） | — |
 | Dev Home | 不要 | — | — |
 
 ## 日常・連絡・メモ
@@ -65,7 +65,7 @@
 | CrystalDiskInfo | 代替 | GSmartControl、smartctl、nvme-cli | 30-apps / 10-base |
 | CPU-Z | 代替 | CPU-X | 30-apps |
 | CrystalMark 3D25 | 不要 | — | — |
-| HyperX NGENUITY | 判断待ち | Linux 版なし | — |
+| HyperX NGENUITY | 不要 | 機器は USB マイク QuadCast S。マイクは標準の USB オーディオとして使い、光り方の設定だけ諦める。当日に入力を確認 | — |
 | MOTU M Series | 代替 | ドライバ不要（PipeWire）。当日に入出力を確認 | — |
 | LG Calibration Studio | 不要 | Linux 版なし | — |
 | NVIDIA App / コントロールパネル / FrameView / PhysX / HD オーディオ / グラフィックス ドライバー | 代替 | nvidia-driver-610-open | 20-gpu |
