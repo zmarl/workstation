@@ -1,0 +1,24 @@
+{
+  "mcpServers": {
+    "codex": {
+      "type": "stdio",
+      "command": "codex",
+      "args": [
+        "-m",
+        "gpt-5.5",
+        "mcp-server"
+      ]
+    },
+    "notion": {
+      "type": "stdio",
+      "command": "npx",
+      "args": [
+        "-y",
+        "@notionhq/notion-mcp-server"
+      ],
+      "env": {
+        "NOTION_TOKEN": "__SET_ON_LINUX__"
+      }
+    }
+  }
+}

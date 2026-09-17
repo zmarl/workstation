@@ -1,0 +1,4 @@
+interface:
+  display_name: "Investment Auto Run Commands"
+  short_description: "Run repo commands instead of asking copy-paste"
+  default_prompt: "In D:\\Dev\\Investment, run the needed local command yourself to inspect state or fetch information. Only stop at human-only boundaries like passwords, MFA, UAC, browser auth, GUI steps, or explicit irreversible apply requests."

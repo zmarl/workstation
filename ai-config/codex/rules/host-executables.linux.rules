@@ -1,0 +1,5 @@
+# Host-specific executable paths on Ubuntu. Force top-level agent commands through the
+# canonical basename rules in default.rules (Linux counterpart of the Windows file).
+
+prefix_rule(pattern=["/usr/bin/git"], decision="forbidden", justification="Use the canonical git basename so repository guardrails apply.")
+prefix_rule(pattern=["/usr/bin/gh"], decision="forbidden", justification="Use the GitHub connector for reads and sync_repo.py for lifecycle mutations.")

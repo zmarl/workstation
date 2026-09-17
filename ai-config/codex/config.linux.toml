@@ -1,0 +1,111 @@
+# Codex settings carried over from the Windows PC (2026-09-17).
+# 50-ai-config.sh replaces __INVESTMENT_PATH__ and __HOME__ when installing.
+# Dropped on purpose: Windows-only runtime entries the ChatGPT app regenerates
+# (notify, [windows], node_repl/cua_repl MCP, local marketplaces, hook trust hashes,
+# microphone device id).
+
+personality = "pragmatic"
+web_search = "live"
+suppress_unstable_features_warning = true
+
+model_reasoning_effort = "medium"
+plan_mode_reasoning_effort = "xhigh"
+sandbox_mode = "danger-full-access"
+approval_policy = "never"
+
+model = "gpt-6-astra"
+review_model = "gpt-5.6-sol"
+service_tier = "default"
+
+[agents]
+max_threads = 6
+max_depth = 1
+
+[features]
+unified_exec = true
+multi_agent = true
+apps = true
+goals = true
+js_repl = false
+memories = true
+chronicle = false
+
+[sandbox_workspace_write]
+network_access = true
+exclude_slash_tmp = false
+writable_roots = []
+exclude_tmpdir_env_var = false
+
+[notice]
+hide_full_access_warning = true
+hide_rate_limit_model_nudge = true
+fast_default_opt_out = true
+
+[projects."__INVESTMENT_PATH__"]
+trust_level = "trusted"
+
+[projects."__HOME__"]
+trust_level = "trusted"
+
+[plugins."github@openai-curated"]
+enabled = true
+
+[plugins."documents@openai-primary-runtime"]
+enabled = true
+
+[plugins."spreadsheets@openai-primary-runtime"]
+enabled = true
+
+[plugins."presentations@openai-primary-runtime"]
+enabled = true
+
+[plugins."sites@openai-bundled"]
+enabled = true
+
+[plugins."visualize@openai-bundled"]
+enabled = true
+
+[plugins."pdf@openai-primary-runtime"]
+enabled = true
+
+[plugins."template-creator@openai-primary-runtime"]
+enabled = true
+
+[plugins."browser@openai-bundled"]
+enabled = true
+
+[plugins."computer-use@openai-bundled"]
+enabled = true
+
+[plugins."mattpocock-skills@personal"]
+enabled = true
+
+[plugins."codex-app-tools@openai-bundled"]
+enabled = true
+
+[plugins."ponytail@ponytail"]
+enabled = false
+
+[plugins."ponytail@personal"]
+enabled = true
+
+[marketplaces.ponytail]
+source_type = "git"
+source = "https://github.com/DietrichGebert/ponytail.git"
+
+[mcp_servers.openaiDeveloperDocs]
+url = "https://developers.openai.com/mcp"
+
+[desktop]
+appearanceTheme = "system"
+usePointerCursors = false
+localeOverride = "ja-JP"
+followUpQueueMode = "queue"
+conversationDetailMode = "STEPS_COMMANDS"
+keepRemoteControlAwakeWhilePluggedIn = true
+enabled-reasoning-efforts = ["low", "medium", "high", "xhigh", "ultra", "max"]
+selected-avatar-id = "rocky"
+
+[memories]
+generate_memories = true
+use_memories = true

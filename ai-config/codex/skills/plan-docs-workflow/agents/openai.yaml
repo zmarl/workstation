@@ -1,0 +1,4 @@
+interface:
+  display_name: "Plan & Docs Workflow"
+  short_description: "Plan-firstでLite/Full判定し、必要時のみDocs更新する。"
+  default_prompt: "Use $plan-docs-workflow を使って、このタスクをPlan-firstで進め、Lite/Full判定と必要時のみDocs更新で実行して。"

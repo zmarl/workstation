@@ -1,0 +1,5 @@
+# Local run state never belongs in the kit
+.state/
+*.log
+*.deb
+tmp/

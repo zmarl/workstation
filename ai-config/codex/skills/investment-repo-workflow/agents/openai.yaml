@@ -1,0 +1,4 @@
+interface:
+  display_name: "Investment Repo Workflow"
+  short_description: "D:\\Dev\\Investment 向けの実装workflow導線。"
+  default_prompt: "Use $investment-repo-workflow to run this D:\\Dev\\Investment task with repo guardrails, Lite/Full judgment, and worklog discipline."

@@ -1,0 +1,4 @@
+interface:
+  display_name: "Sub-agent Delegation"
+  short_description: "Split complex tasks and delegate clear ownership to sub-agents."
+  default_prompt: "Use this skill to break work into scoped chunks, delegate with explicit ownership, and merge outcomes safely."

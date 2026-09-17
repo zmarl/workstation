@@ -1,0 +1,24 @@
+# 10-base.sh: tools every later step relies on (Ubuntu 26.04 main/universe)
+build-essential
+pkg-config
+curl
+wget
+git
+git-lfs
+gnupg
+ca-certificates
+jq
+unzip
+zip
+zstd
+rsync
+ntfs-3g
+qemu-utils
+pciutils
+ubuntu-drivers-common
+lm-sensors
+smartmontools
+nvme-cli
+htop
+btop
+nvtop

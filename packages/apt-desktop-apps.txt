@@ -1,0 +1,5 @@
+# 30-apps.sh: desktop utilities from the Ubuntu archive (replacements for Windows-only tools)
+solaar          # Logi Options+ / G HUB
+gsmartcontrol   # CrystalDiskInfo
+cpu-x           # CPU-Z
+ydotool         # lets Handy type text on Wayland (needs the input group, see 35-permissions.sh)

@@ -1,0 +1,76 @@
+# Investment human-boundary guardrails.
+# Git/GitHub actions follow the current request and its approved workflow.
+# Use sync_repo.py for the approved lifecycle; absence of a deny is not consent.
+# Local Desktop builds are permitted by ODR-0038 D7; external distribution,
+# publication, destructive operations, credentials and real sends retain guards.
+
+prefix_rule(pattern=["git", "reset", "--hard"], decision="forbidden", justification="Hard reset can destroy uncommitted work.")
+prefix_rule(pattern=["git", "clean"], decision="forbidden", justification="Repository clean is destructive regardless of option ordering.")
+prefix_rule(pattern=["git.exe", "clean"], decision="forbidden", justification="Repository clean is destructive regardless of executable suffix.")
+prefix_rule(pattern=["git", "branch", "-D"], decision="forbidden", justification="Forced branch deletion is forbidden.")
+
+prefix_rule(pattern=["pwsh", "-File", "scripts/register_schedules.ps1"], decision="forbidden", justification="Scheduler registration requires the scheduler-registration handoff.")
+prefix_rule(pattern=["powershell", "-File", "scripts/register_schedules.ps1"], decision="forbidden", justification="Scheduler registration requires the scheduler-registration handoff.")
+
+prefix_rule(pattern=["gh", "release", "create"], decision="forbidden", justification="Release publication is a human boundary.")
+prefix_rule(pattern=["gh.exe", "release", "create"], decision="forbidden", justification="Release publication is a human boundary.")
+prefix_rule(pattern=["npm", "publish"], decision="forbidden", justification="Package publication is a human boundary.")
+prefix_rule(pattern=["npm.cmd", "publish"], decision="forbidden", justification="Package publication is a human boundary regardless of Windows shim.")
+prefix_rule(pattern=["uv", "publish"], decision="forbidden", justification="Package publication is a human boundary.")
+prefix_rule(pattern=["uv.exe", "publish"], decision="forbidden", justification="Package publication is a human boundary regardless of executable suffix.")
+prefix_rule(pattern=["yarn", "publish"], decision="forbidden", justification="Package publication is a human boundary.")
+prefix_rule(pattern=["pnpm", "publish"], decision="forbidden", justification="Package publication is a human boundary.")
+prefix_rule(pattern=["pnpm.cmd", "publish"], decision="forbidden", justification="Package publication is a human boundary regardless of Windows shim.")
+prefix_rule(pattern=["cargo", "publish"], decision="forbidden", justification="Package publication is a human boundary.")
+prefix_rule(pattern=["cargo.exe", "publish"], decision="forbidden", justification="Package publication is a human boundary regardless of executable suffix.")
+prefix_rule(pattern=["cargo", ["+stable", "+beta", "+nightly"], "publish"], decision="forbidden", justification="Rust toolchain selection must not bypass package publication rules.")
+prefix_rule(pattern=["twine", "upload"], decision="forbidden", justification="Package publication is a human boundary.")
+
+prefix_rule(pattern=["docker", "push"], decision="forbidden", justification="Container publication is a human boundary.")
+prefix_rule(pattern=["kubectl", "apply"], decision="forbidden", justification="Cluster mutation is a human boundary.")
+prefix_rule(pattern=["kubectl", "delete"], decision="forbidden", justification="Cluster mutation is a human boundary.")
+prefix_rule(pattern=["terraform", "apply"], decision="forbidden", justification="Infrastructure apply is a human boundary.")
+prefix_rule(pattern=["terraform", "destroy"], decision="forbidden", justification="Infrastructure destruction is a human boundary.")
+
+prefix_rule(pattern=[["powershell", "pwsh"], "-File", ["scripts/run_tool.ps1", "scripts\\run_tool.ps1", ".\\scripts\\run_tool.ps1", "./scripts/run_tool.ps1"]], decision="forbidden", justification="The scheduler wrapper can send real notifications; manual runs require explicit human approval.")
+prefix_rule(pattern=[["powershell", "pwsh"], "-ExecutionPolicy", "Bypass", "-File", ["scripts/run_tool.ps1", "scripts\\run_tool.ps1", ".\\scripts\\run_tool.ps1", "./scripts/run_tool.ps1"]], decision="forbidden", justification="The scheduler wrapper can send real notifications; manual runs require explicit human approval.")
+
+prefix_rule(pattern=[["powershell", "pwsh"], ["-EncodedCommand", "-enc", "-e"]], decision="forbidden", justification="Encoded shell commands are forbidden.")
+prefix_rule(pattern=[["powershell.exe", "pwsh.exe"], ["-EncodedCommand", "-enc", "-e"]], decision="forbidden", justification="Encoded shell commands are forbidden regardless of executable suffix.")
+prefix_rule(pattern=[["powershell", "pwsh", "powershell.exe", "pwsh.exe"], "-NoLogo", "-NoProfile", ["-EncodedCommand", "-enc", "-e"]], decision="forbidden", justification="Encoded shell commands are forbidden after standard startup options.")
+prefix_rule(pattern=[["powershell", "pwsh", "powershell.exe", "pwsh.exe"], "-NoProfile", "-NoLogo", ["-EncodedCommand", "-enc", "-e"]], decision="forbidden", justification="Encoded shell commands are forbidden regardless of startup-option ordering.")
+prefix_rule(pattern=[["powershell", "pwsh"], ["-NoProfile", "-NonInteractive", "-NoLogo"], ["-EncodedCommand", "-enc", "-e"]], decision="forbidden", justification="Encoded shell commands are forbidden after standard shell options.")
+prefix_rule(pattern=[["powershell", "pwsh"], "-ExecutionPolicy", ["Bypass", "Unrestricted", "RemoteSigned"], ["-EncodedCommand", "-enc", "-e"]], decision="forbidden", justification="Encoded shell commands are forbidden after execution-policy options.")
+
+prefix_rule(
+    pattern=[
+        "uv",
+        "run",
+        "python",
+        "-m",
+        [
+            "tools.notifications.breakout_alert.main",
+            "tools.notifications.digest_dispatcher.main",
+            "tools.notifications.earnings_schedule.main",
+            "tools.notifications.event_calendar_sync.main",
+            "tools.notifications.ingest_failure_bridge.main",
+            "tools.notifications.jpx_drift_streak_alert.main",
+            "tools.notifications.jpx_protected_codes_review_reminder.main",
+            "tools.notifications.jpx_tracker.main",
+            "tools.notifications.law_tracker.main",
+            "tools.notifications.news_detector.main",
+            "tools.notifications.pts_ranking.main",
+            "tools.notifications.regime_alert.main",
+            "tools.notifications.regulation_event_notifier.main",
+            "tools.notifications.screening_alert_dispatcher.main",
+            "tools.notifications.tdnet.main",
+            "tools.notifications.topix_tracker.main",
+            "tools.notifications.tradingview.main",
+            "tools.notifications.weekly_summary.main",
+        ],
+    ],
+    decision="forbidden",
+    justification="Real notification entry points require explicit human approval.",
+    match=["uv run python -m tools.notifications.tdnet.main"],
+    not_match=["uv run python -m tools.analysis.example.main"],
+)

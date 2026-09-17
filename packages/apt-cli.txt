@@ -1,0 +1,14 @@
+# 10-base.sh: command-line tools used on the Windows PC that Ubuntu 26.04 packages
+# (yazi, DuckDB and WezTerm are not in the archive; see 40-user-tools.sh and 30-apps.sh)
+ripgrep
+fd-find
+fzf
+neovim
+zoxide
+starship
+lazygit
+7zip
+ffmpeg
+imagemagick
+poppler-utils
+fish

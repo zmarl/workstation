@@ -1,0 +1,15 @@
+{
+  "_comment": "Claude Code plugins on the Windows PC (2026-09-17). The cache is not carried; 50-ai-config.sh re-adds the marketplaces and installs the plugins. Enabled state comes from settings.json enabledPlugins.",
+  "marketplaces": {
+    "claude-plugins-official": "anthropics/claude-plugins-official",
+    "jarrodwatts-claude-delegator": "jarrodwatts/claude-delegator",
+    "thedotmack": "thedotmack/claude-mem",
+    "planning-with-files": "OthmanAdi/planning-with-files"
+  },
+  "plugins": [
+    "rust-analyzer-lsp@claude-plugins-official",
+    "frontend-design@claude-plugins-official",
+    "planning-with-files@planning-with-files",
+    "claude-mem@thedotmack"
+  ]
+}

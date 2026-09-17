@@ -1,0 +1,4 @@
+interface:
+  display_name: "Investment Scheduler Registration"
+  short_description: "Open admin window for scheduler password prompt"
+  default_prompt: "In D:\\Dev\\Investment, re-register scheduler tasks and get to the point where the user can type the Windows password locally."

@@ -1,0 +1,4 @@
+interface:
+  display_name: "Investment App Change Workflow"
+  short_description: "Keep desktop, API, DB, and manifest changes aligned."
+  default_prompt: "Use $investment-app-change-workflow for D:\\Dev\\Investment app changes that touch desktop UI, decision_api, DB contracts or migrations, or run_manifest job wiring so the stack stays aligned and verified."
