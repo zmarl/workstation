@@ -11,6 +11,7 @@
 | Cursor / gh / Docker / NVIDIA Container Toolkit | 各社の公式 apt リポジトリ | 公式手順どおり。gh は Ubuntu 版（2.46）が古く、snap は公式が非推奨 |
 | WezTerm | fury の apt リポジトリの `wezterm-nightly` | 安定版は 2024-02 のまま（Windows と同じ版）で、Ubuntu 24.04 以降向けの配布が無い。26.04 は Wayland のみなので、以後の修正を含む毎日更新の nightly にする。設定は Windows と共通のまま Linux 分岐だけ修正（fish のパス、WSL タブは Windows だけ） |
 | CoolerControl | 公式 `setup.sh` と同じ内容のリポジトリ設定を台本に直接書く | 管理者権限でネットのスクリプトを流さない |
+| LM Studio | 公式 .deb（`lmstudio.ai/download/latest/linux/x64?format=deb` が最新版へ転送） | AppImage（約 1GB）もあるが、.deb はメニュー登録と依存パッケージの導入が自動。依存関係は 26.04 で解決できることを確認。Bionic は別アプリで不要 |
 | Discord / Obsidian / OpenCode / Handy / LACT | 公式 `.deb`（GitHub のリリースから名前で探す） | Obsidian は最新リリースに Android 版だけのことがあるため、最近のリリースを順に探す。LACT は 26.04 専用ビルドを選ぶ |
 | Thunderbird | `apt install thunderbird`（中身は snap） | 26.04 の標準。自動更新される |
 | yazi / DuckDB | yazi は GitHub のリリース、DuckDB は公式インストーラで 1.5.5 を固定 | どちらも Ubuntu のパッケージに無い。DuckDB 1.4 は 9 月でサポート終了 |

@@ -4,7 +4,6 @@
 
 | 事項 | 状況 | 提案 |
 | --- | --- | --- |
-| Bionic（LM Studio 社の AI エージェントアプリ、2026-07 発表） | Linux 版あり（1.1.2 以降）。この PC には 09-11 に入れ 09-15 頃まで触った形跡、専用のモデル置き場は空 | オーナーに説明済み、入れるかの回答待ち |
 | GitHub Desktop | 公式の Linux 版なし（有志版は 2025-02 で止まっている） | 入れない。gh と lazygit で代わりにする |
 | DLsiteNest | Linux 版なし | ブラウザで利用 |
 | Synology BeeStation | Linux のクライアントなし | Web ポータルか、ローカルの共有フォルダとしてつなぐ（資格情報はオーナーが入力） |
@@ -25,6 +24,12 @@
 ## 不要と決まったもの
 
 - FreeToken Desktop（09-17 オーナー回答: 使っていない）
+- Bionic（LM Studio 社の AI エージェントアプリ）。09-17 オーナー回答「LM Studio を使うのに要るなら入れる」→ LM Studio は別アプリで Bionic は不要（配布元の案内と、パッケージの依存関係で確認）なので入れない。LM Studio 本体は 30-apps で入れる
+- Windows の `~/.lmstudio`（約 2.9GB）は Bionic の実行部品と CLI で、モデルは 0 件のため運ばない
+
+## LM Studio を使うときの注意
+
+- 72GB のカード（RTX PRO 5000）は投資アプリの vLLM 用（ODR-0044）。LM Studio で大きなモデルを同じカードに載せると取り合いになるので、LM Studio の設定で使う GPU を 5070 Ti に絞るか、vLLM を止めているときに使う
 - Claude アプリ（ベータ）と ChatGPT アプリ（プレビュー）の Wayland での不具合（通知・ショートカット・浮動ウィンドウ）
 - 日本語入力が Chrome で二重にならないか
 

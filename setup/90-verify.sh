@@ -136,7 +136,7 @@ fi
 
 # ------------------------------------------------------------------- apps
 check_pkg google-chrome-stable claude-desktop chatgpt cursor wezterm-nightly discord obsidian \
-    opencode handy solaar gsmartcontrol cpu-x ydotool coolercontrol lact \
+    opencode lm-studio handy solaar gsmartcontrol cpu-x ydotool coolercontrol lact \
     docker-ce nvidia-container-toolkit
 if [ "$IN_CONTAINER" = 1 ]; then
     result SKIP "Thunderbird（snap）" "コンテナ"
@@ -192,7 +192,7 @@ result MANUAL "音声入力" "Handy で日本語を話し、エディタに文�
 result MANUAL "オーディオ" "MOTU から音が出るか、HyperX QuadCast S（と MOTU）のマイクが入るか（設定 → サウンド）"
 result MANUAL "Discord" "ログイン、通話、画面共有ができるか"
 result MANUAL "Chrome の同期" "ブックマーク・パスワード・拡張機能（LINE を含む）が戻ったか"
-result MANUAL "各アプリのログイン" "Claude アプリ・ChatGPT・Cursor・Obsidian・Thunderbird・OpenCode"
+result MANUAL "各アプリのログイン" "Claude アプリ・ChatGPT・Cursor・Obsidian・Thunderbird・OpenCode（LM Studio は起動の確認だけ）"
 result MANUAL "Claude のメモリ" "Claude Code で投資アプリのフォルダを開き、過去のメモリの内容を尋ねて答えられるか"
 
 echo

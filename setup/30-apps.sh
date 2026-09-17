@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # CHANGES: 配布元の公式 apt リポジトリを登録し（GitHub CLI・Claude アプリ・Cursor・WezTerm・
 # CHANGES: Docker・NVIDIA Container Toolkit・CoolerControl。Chrome と ChatGPT は公式 .deb が自分で登録）、
-# CHANGES: 日常アプリ（Chrome・Claude・ChatGPT・Discord・Cursor・Obsidian・OpenCode・Thunderbird）、
+# CHANGES: 日常アプリ（Chrome・Claude・ChatGPT・Discord・Cursor・Obsidian・OpenCode・LM Studio・Thunderbird）、
 # CHANGES: 音声入力 Handy、周辺機器・監視の代替（Solaar・CoolerControl・LACT・GSmartControl・CPU-X）、
 # CHANGES: Docker Engine と GPU 用のコンテナ設定を入れます。グループへの追加は行いません（35-permissions.sh）。
 # RUN-AS: root（setup/run-as-admin.sh 30-apps）。項目を絞るときは引数に項目名（例: chrome discord）
@@ -124,6 +124,12 @@ app_opencode() {
     install_deb_from_url opencode "$url"
 }
 
+app_lm_studio() {
+    # LM Studio does not need Bionic (a separate agent app from the same company).
+    # The "latest" link redirects to the current versioned .deb (package name lm-studio).
+    install_deb_from_url lm-studio 'https://lmstudio.ai/download/latest/linux/x64?format=deb'
+}
+
 app_handy() {
     local url
     url="$(github_asset_url cjpais/Handy '/Handy_[0-9.]+_amd64\.deb$')"
@@ -156,7 +162,7 @@ app_thunderbird() {
     apt_install thunderbird
 }
 
-ALL_APPS=(gh chrome claude_desktop chatgpt cursor wezterm discord obsidian opencode handy
+ALL_APPS=(gh chrome claude_desktop chatgpt cursor wezterm discord obsidian opencode lm_studio handy
     desktop_utilities coolercontrol lact thunderbird docker nvidia_container_toolkit)
 
 selected=("$@")

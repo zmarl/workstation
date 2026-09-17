@@ -32,7 +32,8 @@
 | FFmpeg / ImageMagick / Poppler / 7-Zip | 入れる | Ubuntu のパッケージ | 10-base |
 | yt-dlp（uv tool） | 入れる | uv tool | 40-user-tools |
 | Unsloth | 不要（ここでは） | 投資アプリ側の学習環境で扱う（ODR-0044） | — |
-| Bionic（LM Studio 社の AI エージェント） | 判断待ち | Linux 版あり。入れるかはオーナーの回答待ち | — |
+| LM Studio（Windows では未導入。オーナーが今後使う） | 入れる | 公式 .deb（パッケージ名 lm-studio） | 30-apps |
+| Bionic（LM Studio 社の AI エージェント） | 不要 | LM Studio を使うのに必要ない別アプリ（09-17 オーナー回答を受けて判断） | — |
 | FreeToken Desktop | 不要 | 使っていない（09-17 オーナー回答） | — |
 | Dev Home | 不要 | — | — |
 
