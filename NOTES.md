@@ -54,4 +54,10 @@
 - 最初の `10-base` は 17:48 にウィンドウを開いたが、ログが 1 件も作られないまま終了コード 1 で記録されていた（パスワード入力前にウィンドウが閉じられたと判断）。導入は行われていなかったため、やり直した。
 - 19:00–19:01 **段階 1 `10-base`: 全項目 ok**。system-upgrade（13 個の更新）・apt-base・apt-cli・apt-japanese。rg / fzf / nvim / starship / lazygit / fish / jq / btop / nvtop / git-lfs / ffmpeg / fdfind の実体と、ibus-mozc・fcitx5-mozc・fonts-noto-cjk の導入を確認。多くが導入済みだったため短時間で完了。
 - 19:01–19:02 **段階 2 `20-gpu`: 全項目 ok**。Ubuntu 導入時に入っていた `nvidia-driver-595-open` は要件（610 以上）未満だったため、`nvidia-driver-610-open` へ入れ替え。`reboot-required` を作成。**再起動待ち**で中断。
-- 再起動後の再開点: `20-gpu` をもう一度流し、`reboot-required` を消してから段階 3 `30-apps` へ。
+- 19:22 再起動。ドライバ 610.57.04 が RTX PRO 5000 72GB と RTX 5070 Ti の両方で動いていることを確認。
+- 19:29 **段階 2 `20-gpu` 再実行: 全項目 ok**。動作中の 610 系は要件を満たすため入れ替えなし。`nvidia-persistenced` は 26.04 では静的ユニット（`systemctl enable` の対象外）で、`--now` により稼働中。`reboot-required` を削除。
+- 19:31 段階 3 の 1 回目は、引数なしのときに空の項目名が 1 つ渡り `unknown-` で失敗（`run-as-admin.sh` の `printf ' %q' "$@"` が引数ゼロでも `''` を出す不具合）。導入は行われていない。台本を直して再実行。
+- 19:31–19:35 **段階 3 `30-apps`: 全項目 ok**。Chrome 153 / Claude 2.2553.1 / ChatGPT 26.915 / Cursor 3.21.16 / WezTerm nightly 20260917 / Discord 1.0.158 / Obsidian 1.13.7 / OpenCode 1.18.31 / LM Studio 0.4.25 / Handy 0.9.7 / Solaar 1.1.19 / CoolerControl 5.0.1 / LACT 0.10.1 / GSmartControl / CPU-X / Thunderbird（snap 156.0）/ Docker 29.8.1 + compose / NVIDIA Container Toolkit 1.20.1。Docker は稼働中で `nvidia` ランタイムが登録済み。
+- `nvidia_container_toolkit` は 1 回目に `nvidia.github.io` へ繋がらず失敗（curl 7）。一時的な不調で、確認すると到達できたためその項目だけ再実行して成功。
+- gh は Ubuntu の ESM 側（優先度 510）が公式リポジトリ（500）より強く、古い 2.46.0 が入った。`/etc/apt/preferences.d/github-cli.pref` で公式を優先する pin を台本に追加し、導入済みでも候補と違えば入れ替えるようにして再実行 → **公式 2.101.0**。仮置きの `~/.local/bin/gh` を削除し、GitHub のログイン（zmarl）が残っていることを確認。
+- 次の再開点: 段階 4（権限の変更を 1 項目ずつ了承 → `35-permissions`）。

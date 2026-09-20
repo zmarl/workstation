@@ -18,7 +18,24 @@ app_gh() {
         /etc/apt/keyrings/githubcli-archive-keyring.gpg
     write_apt_source /etc/apt/sources.list.d/github-cli.list \
         "deb [arch=${ARCH} signed-by=/etc/apt/keyrings/githubcli-archive-keyring.gpg] https://cli.github.com/packages stable main"
+    # Ubuntu ships an older gh in universe/ESM, and the ESM pocket outranks third-party
+    # repositories by default. Prefer the upstream build the kit is written against.
+    write_apt_source /etc/apt/preferences.d/github-cli.pref \
+        "Package: gh
+Pin: origin cli.github.com
+Pin-Priority: 600"
     apt_install gh
+    # A gh already installed from Ubuntu's pocket is not replaced by apt_install, so move it
+    # to the pinned upstream build when the candidate differs from what is installed.
+    if [ "$SIMULATE" != 1 ]; then
+        local installed candidate
+        installed="$(dpkg-query -W -f='${Version}' gh 2>/dev/null || true)"
+        candidate="$(LC_ALL=C apt-cache policy gh | awk '/Candidate:/ {print $2; exit}')"
+        if [ -n "$candidate" ] && [ "$candidate" != "(none)" ] && [ "$installed" != "$candidate" ]; then
+            log "   gh を ${installed} から ${candidate}（公式）へ入れ替えます"
+            DEBIAN_FRONTEND=noninteractive apt-get install -y gh
+        fi
+    fi
 }
 
 app_claude_desktop() {

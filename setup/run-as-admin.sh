@@ -41,7 +41,8 @@ wrapper="$STATE_DIR/admin-${name}.sh"
     echo "echo '管理者操作: ${name}'"
     echo "echo 'この内容で実行します。パスワードを入力してください（やめる場合はウィンドウを閉じてください）。'"
     printf 'sudo -- bash %q' "$script"
-    printf ' %q' "$@"
+    # printf with a format but no arguments would still emit one empty quoted word.
+    [ "$#" -gt 0 ] && printf ' %q' "$@"
     echo
     echo "rc=\$?"
     printf 'echo "$rc" > %q\n' "$exit_file"
