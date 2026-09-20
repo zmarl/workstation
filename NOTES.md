@@ -47,3 +47,11 @@
 ## 当日の記録
 
 （AI が段ごとに、日時・結果・選んだ版・起きたことを追記する）
+
+### 2026-09-20（セットアップ当日）
+
+- 18:5x 前後: 準備（gh を `~/.local/bin` へ仮置き、GitHub ログイン、本リポジトリを `~/dev/workstation` へ取得）まで完了。
+- 最初の `10-base` は 17:48 にウィンドウを開いたが、ログが 1 件も作られないまま終了コード 1 で記録されていた（パスワード入力前にウィンドウが閉じられたと判断）。導入は行われていなかったため、やり直した。
+- 19:00–19:01 **段階 1 `10-base`: 全項目 ok**。system-upgrade（13 個の更新）・apt-base・apt-cli・apt-japanese。rg / fzf / nvim / starship / lazygit / fish / jq / btop / nvtop / git-lfs / ffmpeg / fdfind の実体と、ibus-mozc・fcitx5-mozc・fonts-noto-cjk の導入を確認。多くが導入済みだったため短時間で完了。
+- 19:01–19:02 **段階 2 `20-gpu`: 全項目 ok**。Ubuntu 導入時に入っていた `nvidia-driver-595-open` は要件（610 以上）未満だったため、`nvidia-driver-610-open` へ入れ替え。`reboot-required` を作成。**再起動待ち**で中断。
+- 再起動後の再開点: `20-gpu` をもう一度流し、`reboot-required` を消してから段階 3 `30-apps` へ。
