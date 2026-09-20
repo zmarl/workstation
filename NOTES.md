@@ -17,7 +17,6 @@
 
 ## 当日に確かめること（一次資料で確認できなかった点）
 
-- Discord の `.deb` 版が自分で更新されるか（最初の更新が来たとき）
 - MOTU M シリーズの入出力（26.04 での報告が見つからない）
 - HyperX QuadCast S のマイク入力（設定 → サウンドで入力に選べて、音が入るか）
 
@@ -60,4 +59,12 @@
 - 19:31–19:35 **段階 3 `30-apps`: 全項目 ok**。Chrome 153 / Claude 2.2553.1 / ChatGPT 26.915 / Cursor 3.21.16 / WezTerm nightly 20260917 / Discord 1.0.158 / Obsidian 1.13.7 / OpenCode 1.18.31 / LM Studio 0.4.25 / Handy 0.9.7 / Solaar 1.1.19 / CoolerControl 5.0.1 / LACT 0.10.1 / GSmartControl / CPU-X / Thunderbird（snap 156.0）/ Docker 29.8.1 + compose / NVIDIA Container Toolkit 1.20.1。Docker は稼働中で `nvidia` ランタイムが登録済み。
 - `nvidia_container_toolkit` は 1 回目に `nvidia.github.io` へ繋がらず失敗（curl 7）。一時的な不調で、確認すると到達できたためその項目だけ再実行して成功。
 - gh は Ubuntu の ESM 側（優先度 510）が公式リポジトリ（500）より強く、古い 2.46.0 が入った。`/etc/apt/preferences.d/github-cli.pref` で公式を優先する pin を台本に追加し、導入済みでも候補と違えば入れ替えるようにして再実行 → **公式 2.101.0**。仮置きの `~/.local/bin/gh` を削除し、GitHub のログイン（zmarl）が残っていることを確認。
-- 次の再開点: 段階 4（権限の変更を 1 項目ずつ了承 → `35-permissions`）。
+- 19:45–20:10 **版と Linux 対応の総点検**（オーナーの依頼）。入れた版はほぼすべて上流の最新でした: Chrome 153.0.8010.52・Discord 1.0.158・Obsidian 1.13.7（1.13.8 は Android 専用の配布なのでデスクトップは 1.13.7 が最新）・OpenCode 1.18.31・Handy 0.9.7・LACT 0.10.1・LM Studio 0.4.25・NVIDIA Container Toolkit 1.20.1・gh 2.101.0。Claude・ChatGPT・Cursor・WezTerm・Docker・CoolerControl・Thunderbird は各リポジトリの最新（`apt list --upgradable` は空）。ドライバ 610 は 26.04 で選べる最新（595 と 610 のみ）。`40-user-tools` が固定する DuckDB 1.5.5 も最新のまま。
+- Solaar だけ Ubuntu 提供の 1.1.19 で上流は 1.1.20。差が小さいので Ubuntu の更新に任せます（変更しない）。
+- 動作の確認: 両 GPU の認識、docker / containerd / coolercontrold / lactd の稼働、LACT が両カードを認識、Docker への `nvidia` ランタイム登録、`/dev/uinput` が input グループ、ydotool 1.0.4 導入済み。
+- **解決**: Discord は自前の自動更新を持つようになったため、`.deb` でも放置で更新されます（「当日に確かめること」から削除）。
+- **見つかった不足 1**: GNOME + Wayland ではアプリ自身のグローバルキーが他のウィンドウに届かないため、Handy を呼び出せませんでした（登録は空でした）。`setup/70-handy-wayland.sh` を追加し、GNOME のカスタムショートカット（**無変換キー**・オーナーの選択）から `handy --toggle-transcription` を呼び、ログイン時に `--start-hidden` で常駐させます。2 回流しても登録が 1 つのままになることを確認済み。
+- **見つかった不足 2**: 26.04 + Wayland では ibus のままだと Chrome や Electron 製アプリで二重入力が起きやすいため、オーナーの判断で**先に fcitx5 へ切り替える**ことにしました。`switch-ime.sh` に、fcitx5 のとき Chrome の起動設定（`--ozone-platform-hint=auto --enable-wayland-ime`）をユーザー側に置く処理を追加（ibus に戻すと消えます）。
+- 段の表を更新: 段階 4 のあとに IME の切り替えを置き、**ログインし直しを 1 回にまとめる**。Handy の設定は段階 8 に新設（以降の段は 1 つずつ繰り下がり、全 11 段）。
+- 小さな直し: `20-gpu.sh` は 26.04 の `nvidia-persistenced` が静的ユニットであることを踏まえ、起動のみ行うようにしました（長い警告が出なくなります）。
+- 次の再開点: 段階 4（権限の変更を 1 項目ずつ了承 → `35-permissions`）→ `switch-ime.sh fcitx5` → ログインし直し。

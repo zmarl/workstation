@@ -188,7 +188,7 @@ fi
 
 # ---------------------------------------------------------- owner checks
 result MANUAL "日本語入力" "Chrome と Claude アプリで『日本語入力テスト』と打ち、二重にならないか（なる場合は switch-ime.sh fcitx5）"
-result MANUAL "音声入力" "Handy で日本語を話し、エディタに文字が入るか（モデルは Whisper を選ぶ）"
+result MANUAL "音声入力" "無変換キーで Handy が録音を始め、日本語を話すとエディタに文字が入るか（モデルは Whisper を選ぶ）"
 result MANUAL "オーディオ" "MOTU から音が出るか、HyperX QuadCast S（と MOTU）のマイクが入るか（設定 → サウンド）"
 result MANUAL "Discord" "ログイン、通話、画面共有ができるか"
 result MANUAL "Chrome の同期" "ブックマーク・パスワード・拡張機能（LINE を含む）が戻ったか"

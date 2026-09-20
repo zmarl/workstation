@@ -16,13 +16,14 @@
 | 1 | `setup/run-as-admin.sh 10-base` → `setup/wait-admin.sh 10-base` | オーナーがパスワード |
 | 2 | `setup/run-as-admin.sh 20-gpu` → 待つ → 再起動が要ると出たらオーナーに再起動を依頼 → 再起動後に `20-gpu` をもう一度流し、`~/.local/state/workstation/reboot-required` を消す | パスワード・再起動 |
 | 3 | `setup/run-as-admin.sh 30-apps` → 待つ → 公式の gh（`/usr/bin/gh`）が入ったら、最初に仮置きした `~/.local/bin/gh` を消す（ログイン情報は `~/.config/gh` に残る） | パスワード |
-| 4 | 権限の変更を 1 項目ずつ説明し、了承を得たものだけ `setup/run-as-admin.sh 35-permissions <項目...>` | 了承・パスワード・ログインし直し |
+| 4 | 権限の変更を 1 項目ずつ説明し、了承を得たものだけ `setup/run-as-admin.sh 35-permissions <項目...>` → 続けて `bash setup/switch-ime.sh fcitx5`（日本語入力）→ **ログインし直しは 1 回にまとめる** | 了承・パスワード・ログインし直し |
 | 5 | `bash setup/40-user-tools.sh` | なし |
 | 6 | `bash setup/50-ai-config.sh` | なし（プラグイン導入に Claude のログインが必要） |
 | 7 | `bash setup/60-dotfiles-repos.sh` | なし（GitHub ログイン済みが前提） |
-| 8 | 各アプリのログインを 1 つずつ案内 | ログイン |
-| 9 | `bash setup/90-verify.sh` → 自動確認の失敗を直す → 目視確認をオーナーに依頼 | 目視確認 |
-| 10 | 結果を `NOTES.md` に書き、このリポジトリへ commit / push | なし |
+| 8 | `bash setup/70-handy-wayland.sh`（無変換キーで音声入力 Handy を呼び出せるようにする） | なし |
+| 9 | 各アプリのログインを 1 つずつ案内 | ログイン |
+| 10 | `bash setup/90-verify.sh` → 自動確認の失敗を直す → 目視確認をオーナーに依頼 | 目視確認 |
+| 11 | 結果を `NOTES.md` に書き、このリポジトリへ commit / push | なし |
 
 失敗した項目は、ログ（`~/.local/state/workstation/logs/`）で原因を確かめ、直してから**その項目だけ**を流し直します（`30-apps` は `run-as-admin.sh 30-apps chrome discord` のように項目名を渡せます）。同じ失敗を理由なく繰り返しません。
 

@@ -19,7 +19,9 @@
 | Node.js | fnm で LTS | 版の切り替えができ、sudo が要らない。`~/.local/share/fnm/aliases/default/bin` を PATH に入れて、どのシェルからも同じ版が見える |
 | Codex CLI | 公式インストーラ（`~/.local/bin/codex`） | Windows は npm だったが、Node の版に左右されない置き場所の方が MCP の `codex` 呼び出しが安定する |
 | Python | uv（3.12 と 3.13） | 投資アプリの標準。Anaconda は持ち込まない |
-| 日本語入力 | 既定の ibus-mozc。fcitx5-mozc も入れておき、`setup/switch-ime.sh` で切替 | Chrome で文字が二重になる報告があるため、確認で出たらパスワード無しで切り替えられるようにする |
+| 日本語入力 | 26.04 では最初から fcitx5-mozc を使う（`setup/switch-ime.sh fcitx5`）。ibus へ戻すこともできる | 26.04 は Wayland のみで、ibus のままだと Chrome・Electron 製アプリ・snap アプリで文字が二重に入る報告が多い（2026-09-20 に調べ直した）。不具合が出てから直すより先に寄せる |
+| Chrome の起動設定 | fcitx5 のとき `~/.local/share/applications` に `--ozone-platform-hint=auto --enable-wayland-ime` を足した起動項目を置く | Chrome は既定で XWayland として動き、fcitx5 と食い違って日本語が入らない。ユーザー側の写しなので apt の更新に消されず、ファイルを消せば元に戻る |
+| 音声入力の呼び出し | Handy 自身のグローバルキーではなく、GNOME のカスタムショートカット（無変換キー）から `handy --toggle-transcription` を呼ぶ（`setup/70-handy-wayland.sh`） | Wayland では他のウィンドウに焦点があるときアプリ自身のグローバルキーが届かない。Handy 公式も GNOME ではこの方法を案内している。ログイン時に `--start-hidden` で常駐させる |
 | 権限の変更 | `35-permissions.sh` に分け、項目ごとに了承 | docker グループは管理者と同等、input は キー入力の注入を許す。他の台本に混ぜない |
 | SSH | 公開鍵のみ・パスワードと root のログイン禁止 | 今の PC に SSH 鍵は無いので、使う時点で鍵を作って登録する |
 | AI 設定 | ルール・スキル・設定・メモリ・計画を持ち出し。ログイン情報・履歴・キャッシュは運ばない | Codex の config.toml は ChatGPT アプリが Windows で自動生成した項目（通知・Computer Use・ローカルの配布元）を外し、パスを Linux 用に置換 |

@@ -60,6 +60,15 @@ enable_persistence() {
         log "   nvidia-persistenced はドライバ導入後の再起動のあとで有効にします（再実行してください）"
         return 0
     fi
+    # On 26.04 the unit is static (no [Install] section), so it can only be started, and
+    # asking systemctl to enable it prints a long notice that looks like a failure.
+    local state
+    state="$(systemctl is-enabled nvidia-persistenced.service 2>/dev/null || true)"
+    if [ "$state" = static ]; then
+        systemctl start nvidia-persistenced.service
+        log "   nvidia-persistenced は静的ユニットのため起動のみ行いました"
+        return 0
+    fi
     systemctl enable --now nvidia-persistenced.service || systemctl enable nvidia-persistenced.service
 }
 
