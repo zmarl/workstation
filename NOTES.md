@@ -10,7 +10,6 @@
 | HyperX NGENUITY | Linux 版なし。使っている機器は USB マイク HyperX QuadCast S（09-17 オーナー回答・Windows の機器一覧で確認） | 入れない。マイク自体は標準の USB オーディオとして使える見込みで、ミュートと音量つまみは本体側で効く。光り方の設定だけができなくなる。当日にマイクの入力を確認する |
 | Notion・Teams・Outlook・Copilot | デスクトップ版なし | Chrome で開き、必要なら「アプリとしてインストール」。Notion の MCP はトークン抜きの雛形だけ持ち出し（投資アプリ側では廃止済み） |
 | LINE | Linux 版なし | 公式の Chrome 拡張（Chrome の同期で戻る） |
-| codex-pet | GitHub にリモートが無い | 旧ドライブを読み取り専用でつないだ後に写す |
 | Codex の履歴（約 29GB） | 持ち出していない | 必要なら旧ドライブから写す（第 4 版の判断事項） |
 | Tailscale | 今の PC では使っていないので入れていない | 外出先から SSH したくなったら追加を検討 |
 | CUDA 13.4 用のドライバ（R615） | 26.04 にパッケージが無い | 計算レーン着手時に上げる（docs/decisions.md） |
@@ -21,6 +20,8 @@
 - HyperX QuadCast S のマイク入力（設定 → サウンドで入力に選べて、音が入るか）
 
 ## 不要と決まったもの
+
+- `Multi-Agent-Orchestration`（tools）と `codex-pet`（09-20 オーナー回答「多分ないのでいらない。codex-pet も適当に作ったものなのでいらない」）。どちらも GitHub 上に無く、`60-dotfiles-repos.sh` の取得対象から外しました
 
 - FreeToken Desktop（09-17 オーナー回答: 使っていない）
 - Bionic（LM Studio 社の AI エージェントアプリ）。09-17 オーナー回答「LM Studio を使うのに要るなら入れる」→ LM Studio は別アプリで Bionic は不要（配布元の案内と、パッケージの依存関係で確認）なので入れない。LM Studio 本体は 30-apps で入れる
@@ -67,4 +68,11 @@
 - **見つかった不足 2**: 26.04 + Wayland では ibus のままだと Chrome や Electron 製アプリで二重入力が起きやすいため、オーナーの判断で**先に fcitx5 へ切り替える**ことにしました。`switch-ime.sh` に、fcitx5 のとき Chrome の起動設定（`--ozone-platform-hint=auto --enable-wayland-ime`）をユーザー側に置く処理を追加（ibus に戻すと消えます）。
 - 段の表を更新: 段階 4 のあとに IME の切り替えを置き、**ログインし直しを 1 回にまとめる**。Handy の設定は段階 8 に新設（以降の段は 1 つずつ繰り下がり、全 11 段）。
 - 小さな直し: `20-gpu.sh` は 26.04 の `nvidia-persistenced` が静的ユニットであることを踏まえ、起動のみ行うようにしました（長い警告が出なくなります）。
-- 次の再開点: 段階 4（権限の変更を 1 項目ずつ了承 → `35-permissions`）→ `switch-ime.sh fcitx5` → ログインし直し。
+- 20:31 **段階 4 `35-permissions`: input・docker・kvm・ssh の 4 項目すべて ok**（オーナーが 4 項目それぞれを了承）。SSH は openssh-server 1:10.2p1 を導入し、公開鍵のみ・パスワードと root のログインは禁止。`~/.ssh/authorized_keys` は空なので、鍵を置くまで誰も入れません。`relogin-required` を作成。
+  - 1 回目はログインが作られないまま終了コード 1（パスワード入力前にウィンドウが閉じたと判断）。グループも SSH も変わっていないことを確認してからやり直しました。
+- 20:31 `switch-ime.sh fcitx5`。Chrome の起動設定の上書き（`--ozone-platform-hint=auto --enable-wayland-ime`）を `~/.local/share/applications` に配置。
+- 20:32 **段階 5 `40-user-tools`: 全項目 ok**。uv 0.12.17 / Python 3.12.14 / Node 24.21 / pnpm 12.5.1 / Bun 1.4.2 / Rust 1.98.1 + rust-analyzer / Codex CLI 0.155.1 / DuckDB 1.5.5 / yt-dlp 2026.08.19 / yazi / Moralerspace（20 件）を実際に動かして確認。
+- 20:32 **段階 6 `50-ai-config`: 全項目 ok**。設定・メモリを配置（既存は `~/.local/state/workstation/backups/20260920-203249/` へ退避）。marketplace 4 件とプラグイン 4 件（rust-analyzer-lsp / frontend-design / planning-with-files / claude-mem）を導入。
+- 20:33 **段階 7 `60-dotfiles-repos`: 全項目 ok**。端末と Git の設定、Investment（256MB）を `~/dev/Investment` へ取得、ydotool の常駐を有効化。
+- 20:33 **段階 8 `70-handy-wayland`: 全項目 ok**（無変換キーの登録は確認のみ）。
+- 次の再開点: **オーナーがログアウト→ログインし直す**。戻ったら `60-dotfiles-repos` と `70-handy-wayland` を流し直し、段階 9（アプリのログイン）→ 段階 10（`90-verify`）→ 段階 11（記録と push）。

@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # CHANGES: 端末まわりの設定（WezTerm・starship・fish・bash の PATH）と Git の全体設定を置き、
-# CHANGES: GitHub から作業用リポジトリ（Investment・Multi-Agent-Orchestration）を取得します。
+# CHANGES: GitHub から作業用リポジトリ（Investment）を取得します。
 # CHANGES: Git の設定は名前・メール・既定ブランチ・改行（Linux 向けに input）・git-lfs だけを変えます。
 # RUN-AS: 通常ユーザー（bash setup/60-dotfiles-repos.sh [--dev-dir ~/dev]）
 source "$(dirname "$0")/lib.sh"
@@ -63,9 +63,9 @@ repos() {
     if have gh && gh auth status >/dev/null 2>&1; then
         gh auth setup-git
     fi
+    # tools (Multi-Agent-Orchestration) and codex-pet were dropped on 2026-09-20: the owner
+    # does not need them and neither exists on GitHub.
     clone_repo zmarl/Investment "$DEV_DIR/Investment"
-    clone_repo zmarl/Multi-Agent-Orchestration "$DEV_DIR/tools"
-    log "   codex-pet はリモートが無いため、旧ドライブから後で写します（NOTES.md）"
 }
 
 ydotool_service() {
