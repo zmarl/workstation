@@ -118,10 +118,13 @@ check_cmd "rust-analyzer" rust-analyzer --version
 check_cmd "Codex CLI" codex --version
 check_cmd "DuckDB CLI" duckdb --version
 check_cmd "yt-dlp" yt-dlp --version
-for tool in rg fd fzf jq nvim lazygit yazi zoxide starship fish ffmpeg magick; do
+for tool in rg fd fzf jq nvim lazygit yazi zoxide starship fish magick; do
     check_cmd "$tool" "$tool" --version
 done
-check_present "7-Zip" 7zz
+# ffmpeg only understands the single-dash form; --version makes it exit non-zero.
+check_cmd "ffmpeg" ffmpeg -version
+# Ubuntu's 7zip package ships 7z/7za; 7zz only comes with the upstream tarball.
+check_present "7-Zip" 7z
 check_present "Poppler（pdftotext）" pdftotext
 if [ "$IN_CONTAINER" = 1 ]; then
     result SKIP "Claude Code" "コンテナ（段階 1 でオーナーが導入）"

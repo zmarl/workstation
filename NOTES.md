@@ -76,3 +76,17 @@
 - 20:33 **段階 7 `60-dotfiles-repos`: 全項目 ok**。端末と Git の設定、Investment（256MB）を `~/dev/Investment` へ取得、ydotool の常駐を有効化。
 - 20:33 **段階 8 `70-handy-wayland`: 全項目 ok**（無変換キーの登録は確認のみ）。
 - 次の再開点: **オーナーがログアウト→ログインし直す**。戻ったら `60-dotfiles-repos` と `70-handy-wayland` を流し直し、段階 9（アプリのログイン）→ 段階 10（`90-verify`）→ 段階 11（記録と push）。
+
+### 2026-09-20（再ログイン後・ターミナルからアプリへの引き継ぎ）
+
+- 21:0x オーナーがログアウト→ログインし直しを実施。`docker` `kvm` `input` の 3 グループが有効になっていることを確認し、`relogin-required` の印を消しました。fcitx5・Handy（裏で常駐）・ydotool の常駐もログイン時に立ち上がっています。
+- 21:32 **段階 6 `60-dotfiles-repos` と段階 7 `70-handy-wayland` を流し直し**、どちらも全項目 ok。無変換キーの登録は 1 つのままで、何度流しても増えません。
+- 21:32 **段階 10 `90-verify` を実行**。自動確認は当初 2 件が失敗しましたが、どちらも確認の書き方の誤りで、アプリ自体は入っていました。
+  - ffmpeg: `--version`（二重ハイフン）は ffmpeg が受け付けず異常終了するため、`-version` に直しました。
+  - 7-Zip: Ubuntu の 7zip パッケージが用意するコマンドは `7z` で、探していた `7zz` は配布元の tar 版だけの名前でした。`7z` を探すように直しました。
+  - 直したあと**自動確認は 0 件失敗**（全 PASS）。結果は `~/.local/state/workstation/verify-latest.tsv`。
+- **残っているのは、人の目と手でしかできない確認だけです**（`90-verify` の MANUAL 7 件）。日本語入力、音声入力（無変換キー）、オーディオ（MOTU の出力と HyperX QuadCast S の入力）、Discord の通話・画面共有、Chrome の同期、各アプリのログイン、Claude のメモリ読み出し。
+- **注意（日本語入力）**: 入力方式は fcitx5 に切り替え済みで fcitx5 は動いていますが、GNOME のセッションは環境変数として今も ibus を指しています（`XMODIFIERS=@im=ibus` / `QT_IM_MODULE=ibus`）。実際に文字が入らない・変換できない場合は、次のどちらかで直します。
+  1. `~/.config/environment.d/fcitx5.conf` に `XMODIFIERS=@im=fcitx` `GTK_IM_MODULE=fcitx` `QT_IM_MODULE=fcitx` を置いてログインし直す。
+  2. それでも駄目なら `bash setup/switch-ime.sh ibus` で元に戻す（Chrome の起動設定の上書きも一緒に消えます）。
+- 次の再開点: **段階 9（各アプリのログインを 1 つずつ）→ 段階 10 の目視確認 → 段階 11（記録と push）**。ここから先は Claude アプリ側のセッションで続けます。
